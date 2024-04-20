@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Decision Tree Tool GUI</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+  }
+</style>
+</head>
+<body>
+
+<div class="container mt-5">
+
+  <div class="card">
+    <div class="card-header">
+      <h1 class="card-title">Decision Tree Tool GUI</h1>
+    </div>
+    <div class="card-body">
+
+      <div class="form-group">
+        <label for="nodeText">Node Text:</label>
+        <input type="text" id="nodeText" class="form-control">
+      </div>
+
+      <div class="form-group">
+        <label for="nodeId">Node ID:</label>
+        <input type="text" id="nodeId" class="form-control">
+      </div>
+
+      <button onclick="createDecisionTree()" class="btn btn-success btn-block">Create Decision Tree</button>
+
+      <button onclick="addNodeToTree()" class="btn btn-primary btn-block">Add Node to Tree</button>
+
+      <button onclick="removeNodeFromTree()" class="btn btn-danger btn-block">Remove Node from Tree</button>
+
+      <button onclick="updateNodeInTree()" class="btn btn-warning btn-block">Update Node in Tree</button>
+
+      <button onclick="getDecisionTreeState()" class="btn btn-info btn-block">Get Decision Tree State</button>
+
+    </div>
+  </div>
+
+</div>
+
+<script>
+  const decisionTreeTool = new DecisionTreeAPI();
+  function createDecisionTree() {
+    decisionTreeTool.createTree('My Decision Tree');
+  }
+  function addNodeToTree() {
+    const nodeText = document.getElementById('nodeText').value;
+    const nodeId = document.getElementById('nodeId').value;
+    decisionTreeTool.addNode({ id: nodeId, text: nodeText });
+  }
+  function removeNodeFromTree() {
+    const nodeId = document.getElementById('nodeId').value;
+    decisionTreeTool.removeNode(nodeId);
+  }
+  function updateNodeInTree() {
+    const nodeText = document.getElementById('nodeText').value;
+    const nodeId = document.getElementById('nodeId').value;
+    decisionTreeTool.updateNode(nodeId, { text: nodeText });
+  }
+  function getDecisionTreeState() {
+    const treeState = decisionTreeTool.getState();
+    console.log("Decision Tree State:", treeState);
+  }
+</script>
+
+</body>
+</html>
